@@ -7,6 +7,44 @@ Besides that the http server provides a simple Wall application to
 post comments and display them. Therefore extra endpoints were implemented, 
 which uses a MongoDB as database.
 
+## Implementation
+
+### ServerApplication
+
+The main method is located in the class ServerApplication. It allows to pass an additional command line argument to specify a different root directory than the default one "./".
+
+All other used classes are implemented as Singleton and will be initialized before starting the http server and after the application.properties were read.  
+
+### HttpServer
+
+The http server is implemented with the package java.nio.channels, 
+which provides a non-blocking server solution. The server is started on localhost:8080 by default
+and listens to incoming requests. After the request is accepted the requests is read.
+The request is handled within two specific controller classes. 
+
+### FileController
+
+The FileController class handles requests to the local file system and serves the static content for the Wall-Application. 
+Therefore the java.nio.file.* package is used intensively.
+
+For creating the JSON string for listing all files and subdirectory of a requested directory the third party library org.json is used.  
+
+### CommentController
+
+To handle GET and POST requests from the Wall-Application the CommentController uses the CommentCollection class.
+
+### HttpController (abstract)
+
+The abstract HttpController provides methods for creating responses and is used by both mentioned controller classes as parent class.
+
+### CommentCollection
+
+The CommentCollection provides two methods. One for persisting Comments to the MongoDB and one for retrieving the saved comments.  
+
+### Wall-Application
+
+The frontend is implemented with an Angular 8 application and is served as static content from inside the Java application. 
+
 ## API
 
 ### Serve the file system
