@@ -9,6 +9,8 @@ which uses a MongoDB as database.
 
 ## Implementation
 
+The implementation is done with Java 11 and the project uses maven to build the artifacts.
+
 ### ServerApplication
 
 The main method is located in the class ServerApplication. It allows to pass an additional command line argument to specify a different root directory than the default one "./".
