@@ -1,0 +1,12 @@
+mat-card {
+    width: 90%;
+    margin-left: 5%;
+}
+
+mat-form-field{
+    width: 80%;
+}
+
+mat-divider{
+    margin-top: 5px;
+}

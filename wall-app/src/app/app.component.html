@@ -1,0 +1,29 @@
+<div>
+  <mat-toolbar color="primary">
+    <span>Wall-Application</span>
+  </mat-toolbar>
+  <mat-card>
+    <mat-card-header>
+        <mat-card-title>Comments</mat-card-title>
+    </mat-card-header>
+    <mat-card-content *ngFor="let comment of comments; index as i">
+      <span>Comment #{{ i+1 }}</span>
+      <p>{{ comment.text }}</p>
+      <span>{{ comment._id.time | date:'medium' }}</span>
+      <mat-divider></mat-divider>
+    </mat-card-content>
+  </mat-card>
+  <mat-card>
+    <mat-card-content>
+      <form>
+        <mat-form-field>
+            <mat-label>Leave a comment</mat-label>
+            <textarea class="fullwidth" [(ngModel)]="text" name="text" matInput matTextareaAutosize matAutosizeMinRows=3 matAutosizeMaxRows=7></textarea>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+        <button  mat-raised-button (click)="postComment()"  color="primary">Submit comment</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
