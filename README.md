@@ -13,7 +13,16 @@ which uses a MongoDB as database.
 
 The main method is located in the class ServerApplication. It allows to pass an additional command line argument to specify a different root directory than the default one "./".
 
-All other used classes are implemented as Singleton and will be initialized before starting the http server and after the application.properties were read.  
+All other used classes are implemented as Singleton and will be initialized before starting the http server and after the application.properties were read.
+
+The application.properties can be overridden by specifying the exact same VM args
+
+Default values:
+* server.host=localhost
+* server.port=8080
+* mongodb.host=localhost
+* mongodb.port=27017
+* mongodb.database=wallApp  
 
 ### HttpServer
 
@@ -21,6 +30,7 @@ The http server is implemented with the package java.nio.channels,
 which provides a non-blocking server solution. The server is started on localhost:8080 by default
 and listens to incoming requests. After the request is accepted the requests is read.
 The request is handled within two specific controller classes. 
+The response is written back to the client socket channel. 
 
 ### FileController
 
@@ -36,6 +46,18 @@ To handle GET and POST requests from the Wall-Application the CommentController 
 ### HttpController (abstract)
 
 The abstract HttpController provides methods for creating responses and is used by both mentioned controller classes as parent class.
+
+### HttpStatus
+
+The enum HttpStatus provide some Http status codes and their responses.
+* 200 OK
+* 401 Access Denied
+* 404 Not Found
+* 500 Internal Server Error
+
+### MongoDBClient
+
+Here the connection to the MongoDB is configured and established.
 
 ### CommentCollection
 
@@ -66,6 +88,10 @@ The frontend is implemented with an Angular 8 application and is served as stati
   
 * POST /api/comments/comment
   * stores the passed json object into the local MongoDB
+
+### Logging
+
+The third party library logback is used for logging.
 
 ## How to use it
 
